@@ -22,4 +22,7 @@ migration_down:
 sqlc:
 	bin/sqlc generate
 
-.PHONY: postgres createdb docker_start docker_stop dropdb migration_up migration_down migration_fix sqlc
+test:
+	go test -v -cover ./...
+
+.PHONY: postgres createdb dropdb docker_start docker_stop migration_up migration_down sqlc test
