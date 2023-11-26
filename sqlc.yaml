@@ -1,0 +1,11 @@
+version: "2"
+sql:
+    - engine: "postgresql"
+      queries: "sqlc/query.sql"
+      schema: "db/migration/000001_init_schema.up.sql"
+      database:
+          uri: "postgres://root:qwerty123@localhost:5432/simple_bank"
+      gen:
+          go:
+              out: "db"
+              sql_package: "pgx/v5"
