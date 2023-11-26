@@ -20,6 +20,6 @@ migration_down:
 	migrate -path db/migration/ -database "postgresql://root:qwerty123@localhost:5432/simple_bank?sslmode=disable" -verbose down
 
 sqlc:
-	docker run --rm -v $(pwd):/src -w /src sqlc/sqlc generate
+	bin/sqlc generate
 
 .PHONY: postgres createdb docker_start docker_stop dropdb migration_up migration_down migration_fix sqlc
