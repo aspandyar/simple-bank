@@ -3,7 +3,7 @@
 
 - [Application](#application)
 - [Database](#database)
-- [Usage](#usage)
+- [Docker](docker)
 
 ## Application
 
@@ -35,3 +35,44 @@
 ![[Simple Bank.png|]]
 
 
+## Docker
+
+### I used a [docker hub](https://hub.docker.com/) to download image of container to PostgreSQL.
+
+### *Alpine* images are images, which size are very small, so I use it.
+
+```bash
+docker pull postgres
+```
+
+### To start a container, here templates of code:
+
+```bash
+docker run --name <container_name> -e <env variable> -p <host_ports:container_ports> -d <image>:<tag>
+```
+
+#### Docker environment variables:
+
+- `POSTGRES_PASSWORD` => set up **password** of PostgreSQL
+- `POSTGRES_USER` => set up **user**, default user: ***postgres***
+- `POSTGRES_DB` => set a default db, that created while *image first* started, default: `POSTGRES_USER` var will be used
+
+#### Ports
+
+`-p <host_ports:container_ports>`
+
+**TODO**: Understand docker port! 5:28
+
+### Command to that Project:
+
+#### Creating image
+
+```bash
+docker pull postgres:12-alpine
+```
+
+#### Running a container (first time)
+
+```bash
+
+```
