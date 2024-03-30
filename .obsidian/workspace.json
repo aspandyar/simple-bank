@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "04e3ee99b2b63f4a",
+        "id": "ac2d0e4b11011d91",
         "type": "tabs",
         "children": [
           {
-            "id": "f10a5b19833db480",
+            "id": "33cb665252e9a509",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Project Notes.md",
+                "file": "docs/Project Notes.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Project Notes.md",
+                "file": "docs/Project Notes.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Project Notes.md",
+                "file": "docs/Project Notes.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Project Notes.md"
+                "file": "docs/Project Notes.md"
               }
             }
           }
@@ -146,8 +146,22 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "f10a5b19833db480",
+  "active": "33cb665252e9a509",
   "lastOpenFiles": [
-    "Project Notes.md"
+    "docs/diagrams/img",
+    "docs/diagrams/img/Simple Bank.png",
+    "docs/Project Notes.md",
+    "db/Simple Bank.sql~",
+    "db/Simple Bank.sql",
+    "Simple Bank.sql",
+    "().md",
+    "docs/Simple Bank.png",
+    "docs/diagrams/ERD_diagram.pdf",
+    "docs/diagrams",
+    "db",
+    "docs",
+    "README.md",
+    "dbdiagram.io.md",
+    "docs/diagrams/graphs.canvas"
   ]
 }

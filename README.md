@@ -1,4 +1,4 @@
-# Goland simple-bank *tutorial project*
+# Golang simple-bank *tutorial project*
 
 ## Following project contain many interesting ideas, and needfully information for every programmer, who interesting in backend developing
 
