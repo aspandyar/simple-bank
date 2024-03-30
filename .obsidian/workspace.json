@@ -148,6 +148,12 @@
   },
   "active": "33cb665252e9a509",
   "lastOpenFiles": [
+    "db/SQL_Server/Simple Bank.sql",
+    "db/MySQL/Simple Bank.sql",
+    "db/PostgreSQL/Simple Bank.sql",
+    "db/SQL_Server",
+    "db/MySQL",
+    "db/PostgreSQL",
     "docs/diagrams/img",
     "docs/diagrams/img/Simple Bank.png",
     "docs/Project Notes.md",
@@ -157,9 +163,6 @@
     "().md",
     "docs/Simple Bank.png",
     "docs/diagrams/ERD_diagram.pdf",
-    "docs/diagrams",
-    "db",
-    "docs",
     "README.md",
     "dbdiagram.io.md",
     "docs/diagrams/graphs.canvas"
