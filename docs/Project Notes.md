@@ -3,7 +3,7 @@
 
 - [Application](#application)
 - [Database](#database)
-- [Docker](docker)
+- [Docker](#docker)
 
 ## Application
 
@@ -37,7 +37,7 @@
 
 ## Docker
 
-### I used a [docker hub](https://hub.docker.com/) to download image of container to PostgreSQL.
+### I used a [docker hub](https://hub.docker.com/) to download image of container to PostgresSQL.
 
 
 ```bash
@@ -52,7 +52,7 @@ docker run --name <container_name> -e <env variable> -p <host_ports:container_po
 
 #### Docker environment variables:
 
-- `POSTGRES_PASSWORD` => set up **password** of PostgreSQL
+- `POSTGRES_PASSWORD` => set up **password** of PostgresSQL
 - `POSTGRES_USER` => set up **user**, default user: ***postgres***
 - `POSTGRES_DB` => set a default db, that created while *image first* started, default: `POSTGRES_USER` var will be used
 
@@ -61,7 +61,7 @@ docker run --name <container_name> -e <env variable> -p <host_ports:container_po
 `-p <host_ports:container_ports>`
 
 Host Port: port on which container will be running in host system
-Container Port: port to which data will be send from host port (inside docker container system)
+Container Port: port to which data will be sending from host port (inside docker container system)
 
 **Why?** After 2 hours of conversation with [tshipenchko](https://github.com/tshipenchko), we concluded that the provided link of ports is necessary because Docker needs to know which port data should be sent from and to which one. Overall, we believe that the ports of the second container may not be essential for execution, but they provide us with such functionality.
 
