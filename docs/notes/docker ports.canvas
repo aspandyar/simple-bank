@@ -1,16 +1,16 @@
 {
 	"nodes":[
-		{"id":"b603f8ab985299a1","x":-275,"y":-600,"width":250,"height":60,"color":"2","type":"text","text":"bash"},
-		{"id":"faa3aeb7fe211fea","x":460,"y":-380,"width":250,"height":60,"type":"text","text":"docker image"},
-		{"id":"b079b1019d7ce9a5","type":"text","text":"kernel","x":-780,"y":-570,"width":250,"height":60,"color":"1"},
-		{"id":"1e8b1771f1fbb751","x":125,"y":-570,"width":250,"height":60,"color":"5","type":"text","text":"docker"},
-		{"id":"d04827766941e12a","x":-560,"y":-740,"width":250,"height":60,"color":"6","type":"text","text":"file system"},
-		{"id":"5c861270fc403e1a","x":60,"y":-280,"width":250,"height":60,"color":"3","type":"text","text":"settings"},
-		{"id":"d38f4ccd0d85308d","x":60,"y":-120,"width":250,"height":60,"type":"text","text":"env (password), name"},
+		{"id":"b603f8ab985299a1","type":"text","text":"bash","x":-275,"y":-600,"width":250,"height":60,"color":"2"},
+		{"id":"faa3aeb7fe211fea","type":"text","text":"docker image","x":460,"y":-380,"width":250,"height":60},
+		{"id":"1e8b1771f1fbb751","type":"text","text":"docker","x":125,"y":-570,"width":250,"height":60,"color":"5"},
+		{"id":"d04827766941e12a","type":"text","text":"file system","x":-560,"y":-740,"width":250,"height":60,"color":"6"},
+		{"id":"5c861270fc403e1a","type":"text","text":"settings","x":60,"y":-280,"width":250,"height":60,"color":"3"},
+		{"id":"d38f4ccd0d85308d","type":"text","text":"env (password), name","x":60,"y":-120,"width":250,"height":60},
 		{"id":"b6583c5245c5e083","type":"text","text":"ports:\n8000\n8001\n8002\n8003","x":-860,"y":-320,"width":250,"height":200,"color":"4"},
-		{"id":"ad933dfb33ab44c9","x":-500,"y":-435,"width":300,"height":170,"color":"4","type":"text","text":"docker container ports:\n8000 golang-web1\n8000 golang-web2\n"},
-		{"id":"b019b3993b3b6fdd","x":-435,"y":-120,"width":320,"height":60,"color":"#1b3441","type":"text","text":"port: <host_port:container_port>"},
-		{"id":"d9f772b4315c4fd6","x":-400,"y":120,"width":250,"height":50,"color":"1","type":"text","text":"docker container"}
+		{"id":"ad933dfb33ab44c9","type":"text","text":"docker container ports:\n8000 golang-web1\n8000 golang-web2\n","x":-500,"y":-435,"width":300,"height":170,"color":"4"},
+		{"id":"b019b3993b3b6fdd","type":"text","text":"port: <host_port:container_port>","x":-435,"y":-120,"width":320,"height":60,"color":"#1b3441"},
+		{"id":"d9f772b4315c4fd6","type":"text","text":"docker container","x":-400,"y":120,"width":250,"height":50,"color":"1"},
+		{"id":"b079b1019d7ce9a5","type":"text","text":"kernel","x":-735,"y":-540,"width":250,"height":60,"color":"1"}
 	],
 	"edges":[
 		{"id":"03c214226ba7eebc","fromNode":"b079b1019d7ce9a5","fromSide":"bottom","toNode":"b6583c5245c5e083","toSide":"top","color":"1"},
@@ -26,6 +26,7 @@
 		{"id":"4ab9f1bd1d3708f3","fromNode":"d04827766941e12a","fromSide":"bottom","toNode":"b603f8ab985299a1","toSide":"left","color":"6"},
 		{"id":"ec5e63464a046455","fromNode":"ad933dfb33ab44c9","fromSide":"bottom","toNode":"b019b3993b3b6fdd","toSide":"top","color":"4","label":"8000, 8000"},
 		{"id":"19cee3ebe3919269","fromNode":"5c861270fc403e1a","fromSide":"left","toNode":"ad933dfb33ab44c9","toSide":"right","color":"3"},
-		{"id":"9f6b1bfe2828a59d","fromNode":"b019b3993b3b6fdd","fromSide":"bottom","toNode":"d9f772b4315c4fd6","toSide":"top","label":"8000:8000\n8001:8000\n"}
+		{"id":"9f6b1bfe2828a59d","fromNode":"b019b3993b3b6fdd","fromSide":"bottom","toNode":"d9f772b4315c4fd6","toSide":"top","label":"8000:8000\n8001:8000\n"},
+		{"id":"cccdd9b5f9aec725","fromNode":"d04827766941e12a","fromSide":"left","toNode":"b6583c5245c5e083","toSide":"left","color":"6"}
 	]
 }
