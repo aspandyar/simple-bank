@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "7c7fa51794f7d480",
+        "id": "30212f204e2a1af8",
         "type": "tabs",
         "children": [
           {
-            "id": "f38253f7e86e1c75",
+            "id": "27e072b1862e6b2e",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -18,8 +18,33 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "f70aa9908bc541d3",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/notes/Uncompress .tar.gz files.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "7d027a39b83b6d67",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/notes/OS.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -85,7 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "docs/Project Notes.md",
+                "file": "docs/notes/OS.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +127,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "docs/Project Notes.md",
+                "file": "docs/notes/OS.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +150,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "docs/Project Notes.md"
+                "file": "docs/notes/OS.md"
               }
             }
           }
@@ -146,26 +171,30 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "f38253f7e86e1c75",
+  "active": "7d027a39b83b6d67",
   "lastOpenFiles": [
+    "docs/notes/Uncompress .tar.gz files.md",
+    "docs/Project Notes.md",
+    "docs/notes/OS.md",
+    "docs/notes/Docker.md",
+    "README.md",
+    "docs/notes/docker ports.canvas",
+    "docs/notes",
+    "docs/img/migration assets.png",
+    "docs/Screenshot from 2024-03-31 21-08-00.png",
     "db/PostgreSQL/Simple Bank.sql~",
     "db/SQL_Server/Simple Bank.sql",
     "db/MySQL/Simple Bank.sql",
     "db/PostgreSQL/Simple Bank.sql",
-    "docs/diagrams/img/Simple Bank.png",
+    "docs/img/Simple Bank.png",
     "docs/Project Notes.md~",
-    "docs/diagrams/docker ports.canvas",
     "docs/docker ports.canvas",
     "docs/diagrams/ERD_diagram.pdf",
-    "docs/Project Notes.md",
     "db/SQL_Server",
     "db/MySQL",
     "db/PostgreSQL",
-    "docs/diagrams/img",
-    "db/Simple Bank.sql~",
     "().md",
     "docs/Simple Bank.png",
-    "README.md",
     "dbdiagram.io.md"
   ]
 }
