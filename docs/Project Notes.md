@@ -39,7 +39,6 @@
 
 ### I used a [docker hub](https://hub.docker.com/) to download image of container to PostgreSQL.
 
-### *Alpine* images are images, which size are very small, so I use it.
 
 ```bash
 docker pull postgres
@@ -61,9 +60,14 @@ docker run --name <container_name> -e <env variable> -p <host_ports:container_po
 
 `-p <host_ports:container_ports>`
 
-**TODO**: Understand docker port! 5:28
+Host Port: port on which container will be running in host system
+Container Port: port to which data will be send from host port (inside docker container system)
+
+**Why?** After 2 hours of conversation with [tshipenchko](https://github.com/tshipenchko), we concluded that the provided link of ports is necessary because Docker needs to know which port data should be sent from and to which one. Overall, we believe that the ports of the second container may not be essential for execution, but they provide us with such functionality.
 
 ### Command to that Project:
+
+### *Alpine* images are images, which size are very small, so I use it.
 
 #### Creating image
 
@@ -76,3 +80,4 @@ docker pull postgres:12-alpine
 ```bash
 
 ```
+

@@ -1,0 +1,31 @@
+{
+	"nodes":[
+		{"id":"b603f8ab985299a1","x":-275,"y":-600,"width":250,"height":60,"color":"2","type":"text","text":"bash"},
+		{"id":"faa3aeb7fe211fea","x":460,"y":-380,"width":250,"height":60,"type":"text","text":"docker image"},
+		{"id":"b079b1019d7ce9a5","type":"text","text":"kernel","x":-780,"y":-570,"width":250,"height":60,"color":"1"},
+		{"id":"1e8b1771f1fbb751","x":125,"y":-570,"width":250,"height":60,"color":"5","type":"text","text":"docker"},
+		{"id":"d04827766941e12a","x":-560,"y":-740,"width":250,"height":60,"color":"6","type":"text","text":"file system"},
+		{"id":"5c861270fc403e1a","x":60,"y":-280,"width":250,"height":60,"color":"3","type":"text","text":"settings"},
+		{"id":"d38f4ccd0d85308d","x":60,"y":-120,"width":250,"height":60,"type":"text","text":"env (password), name"},
+		{"id":"b6583c5245c5e083","type":"text","text":"ports:\n8000\n8001\n8002\n8003","x":-860,"y":-320,"width":250,"height":200,"color":"4"},
+		{"id":"ad933dfb33ab44c9","x":-500,"y":-435,"width":300,"height":170,"color":"4","type":"text","text":"docker container ports:\n8000 golang-web1\n8000 golang-web2\n"},
+		{"id":"b019b3993b3b6fdd","x":-435,"y":-120,"width":320,"height":60,"color":"#1b3441","type":"text","text":"port: <host_port:container_port>"},
+		{"id":"d9f772b4315c4fd6","x":-400,"y":120,"width":250,"height":50,"color":"1","type":"text","text":"docker container"}
+	],
+	"edges":[
+		{"id":"03c214226ba7eebc","fromNode":"b079b1019d7ce9a5","fromSide":"bottom","toNode":"b6583c5245c5e083","toSide":"top","color":"1"},
+		{"id":"410ccd139f5b485e","fromNode":"b079b1019d7ce9a5","fromSide":"top","toNode":"d04827766941e12a","toSide":"bottom","color":"1"},
+		{"id":"f210170888e7be34","fromNode":"d04827766941e12a","fromSide":"right","toNode":"1e8b1771f1fbb751","toSide":"top","color":"6"},
+		{"id":"e14fb5d29dea9aaa","fromNode":"1e8b1771f1fbb751","fromSide":"right","toNode":"faa3aeb7fe211fea","toSide":"top","color":"5"},
+		{"id":"0d4c415c4f6adbef","fromNode":"b079b1019d7ce9a5","fromSide":"right","toNode":"b603f8ab985299a1","toSide":"left","color":"1"},
+		{"id":"3a924a7a69fa93f4","fromNode":"b603f8ab985299a1","fromSide":"bottom","toNode":"5c861270fc403e1a","toSide":"top","color":"2"},
+		{"id":"23d92d4686d60576","fromNode":"faa3aeb7fe211fea","fromSide":"left","toNode":"5c861270fc403e1a","toSide":"top","color":"5"},
+		{"id":"3598d568fecf7afe","fromNode":"5c861270fc403e1a","fromSide":"bottom","toNode":"d38f4ccd0d85308d","toSide":"top","color":"3"},
+		{"id":"8d1648694587cf83","fromNode":"d38f4ccd0d85308d","fromSide":"bottom","toNode":"d9f772b4315c4fd6","toSide":"right","color":"3"},
+		{"id":"14a927fd8f967256","fromNode":"b6583c5245c5e083","fromSide":"right","toNode":"b019b3993b3b6fdd","toSide":"left","color":"4","label":"8000, 8001"},
+		{"id":"4ab9f1bd1d3708f3","fromNode":"d04827766941e12a","fromSide":"bottom","toNode":"b603f8ab985299a1","toSide":"left","color":"6"},
+		{"id":"ec5e63464a046455","fromNode":"ad933dfb33ab44c9","fromSide":"bottom","toNode":"b019b3993b3b6fdd","toSide":"top","color":"4","label":"8000, 8000"},
+		{"id":"19cee3ebe3919269","fromNode":"5c861270fc403e1a","fromSide":"left","toNode":"ad933dfb33ab44c9","toSide":"right","color":"3"},
+		{"id":"9f6b1bfe2828a59d","fromNode":"b019b3993b3b6fdd","fromSide":"bottom","toNode":"d9f772b4315c4fd6","toSide":"top","label":"8000:8000\n8001:8000\n"}
+	]
+}
