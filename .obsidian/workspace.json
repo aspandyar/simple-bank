@@ -4,15 +4,19 @@
     "type": "split",
     "children": [
       {
-        "id": "44b00fc6090abe5d",
+        "id": "7c7fa51794f7d480",
         "type": "tabs",
         "children": [
           {
-            "id": "27233218ab18bdf4",
+            "id": "f38253f7e86e1c75",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "docs/Project Notes.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -81,6 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "docs/Project Notes.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -97,6 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "docs/Project Notes.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -118,7 +124,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "docs/Project Notes.md"
+              }
             }
           }
         ]
@@ -138,23 +146,23 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "27233218ab18bdf4",
+  "active": "f38253f7e86e1c75",
   "lastOpenFiles": [
+    "db/PostgreSQL/Simple Bank.sql~",
+    "db/SQL_Server/Simple Bank.sql",
+    "db/MySQL/Simple Bank.sql",
+    "db/PostgreSQL/Simple Bank.sql",
+    "docs/diagrams/img/Simple Bank.png",
     "docs/Project Notes.md~",
     "docs/diagrams/docker ports.canvas",
     "docs/docker ports.canvas",
     "docs/diagrams/ERD_diagram.pdf",
     "docs/Project Notes.md",
-    "db/SQL_Server/Simple Bank.sql",
-    "db/MySQL/Simple Bank.sql",
-    "db/PostgreSQL/Simple Bank.sql",
     "db/SQL_Server",
     "db/MySQL",
     "db/PostgreSQL",
     "docs/diagrams/img",
-    "docs/diagrams/img/Simple Bank.png",
     "db/Simple Bank.sql~",
-    "db/Simple Bank.sql",
     "().md",
     "docs/Simple Bank.png",
     "README.md",

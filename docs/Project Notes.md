@@ -65,6 +65,24 @@ Container Port: port to which data will be sending from host port (inside docker
 
 **Why?** After 2 hours of conversation with [tshipenchko](https://github.com/tshipenchko), we concluded that the provided link of ports is necessary because Docker needs to know which port data should be sent from and to which one. Overall, we believe that the ports of the second container may not be essential for execution, but they provide us with such functionality.
 
+### To Exec docker container:
+
+```bash
+docker exec -it <container_name_or_id> <command> [args]
+```
+
+	-i, --interactive          Keep STDIN open even if not attached
+	-t, --tty                  Allocate a pseudo-TTY
+
+#### To out of execution container write: `\q`
+
+### To view logs of docker container:
+
+```bash
+docker logs <container_name_or_id>
+```
+
+
 ### Command to that Project:
 
 ### *Alpine* images are images, which size are very small, so I use it.
@@ -78,6 +96,17 @@ docker pull postgres:12-alpine
 #### Running a container (first time)
 
 ```bash
-
+docker run --name postgres12 -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=qwerty123 -d postgres:12-alpine 
 ```
+
+#### Exec container
+
+
+```bash
+docker exec -it postgres12 psql -U root
+```
+
+	psql => type of running command (it also can be bash, mongosh, and etc.)
+
+`-u, --user string          Username or UID (format: "<name|uid>[:<group|gid>]")`
 
