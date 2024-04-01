@@ -1,10 +1,10 @@
-
 ## Navigation
 
 - [Application](#application)
 - [Database](#database)
 - [Docker](#docker)
 - [Migration](#migration)
+- [CRUD](#crud)
 
 ## Application
 
@@ -127,4 +127,59 @@ migratedown:
 .PHONY: postgres createdb dropdb migrateup migratedown
 ```
 
-To apply migration, we should to set up database in psql (PostgreSQL), so createdb do it, and applying migrate up and down
+To apply migration, we should to set up database in psql (PostgreSQL), so createdb do it, and applying migrateup
+
+## CRUD
+
+	note: see [[CRUD]] to see more about it
+
+### I use [sqlc](https://github.com/sqlc-dev/sqlc) to generate CRUD code in our project.
+
+-  `sqlc init` => to init directory
+- write `sqlc.yaml` file configuration, in my case I used a 2nd version of code:
+
+```yaml
+version: "2"  
+sql:  
+    - engine: "postgresql"  
+      queries: "./db/query/"  
+      schema: "./db/migration/"  
+      gen:  
+          go:  
+              package: "sqlc"  
+              out: "db/sqlc"  
+              sql_package: "database/sql"
+```
+
+- Also I created a directory `./db/query/account.sql`, and insert a generation code from docs:
+
+```sql
+-- name: GetAccount :one  
+SELECT * FROM accounts  
+WHERE id = $1 LIMIT 1;  
+  
+-- name: ListAccount :many  
+SELECT * FROM accounts  
+ORDER BY owner;  
+  
+-- name: CreateAccount :one  
+INSERT INTO accounts (  
+    owner, balance, currency  
+) VALUES (  
+             $1, $2, $3  
+         )  
+RETURNING *;  
+  
+-- name: UpdateAccount :exec  
+UPDATE accounts  
+set balance = $2,  
+    currency = $3  
+WHERE id = $1;  
+  
+-- name: DeleteAccount :exec  
+DELETE FROM accounts  
+WHERE id = $1;
+```
+
+- After it, execute command: `sqlc generate` to generate CRUD function to account table.
+

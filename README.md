@@ -18,10 +18,10 @@ Here are key points of my project:
 
 ## Installation
 
-TODO
+TODO:
 
 ```bash
-TODO
+TODO:
 ```
 
 ## Usage

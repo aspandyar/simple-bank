@@ -29,3 +29,9 @@ tar -xvzf mywebsitebackup.tar.gz -C /path/to/directory
 ### You can learn more about the full options by consulting the related man page of your Linux distribution.
 
 [source](https://help.pressidium.com/en/articles/6979427-how-to-extract-and-unzip-tar-gz-files)
+
+### Note:
+
+- In my way I save any bin files in directory: `/usr/local/bin`
+- To see where bin is use `$ whereis [command]` 
+- see [[OS]] to learn more about FHS
