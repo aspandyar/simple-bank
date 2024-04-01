@@ -161,8 +161,8 @@
   },
   "active": "85a0c8a9932b83ab",
   "lastOpenFiles": [
-    "Makefile~",
     "db/sqlc/account_test.go~",
+    "Makefile~",
     "util/random.go~",
     "util/random.go",
     "util",
