@@ -161,8 +161,8 @@
   },
   "active": "85a0c8a9932b83ab",
   "lastOpenFiles": [
-    "db/sqlc/entry_test.go~",
     "db/sqlc/transfer_test.go~",
+    "db/sqlc/entry_test.go~",
     "db/sqlc/transfer_test.go",
     "transfer_test.go",
     "db/sqlc/account_test.go~",
