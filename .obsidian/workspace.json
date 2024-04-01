@@ -18,8 +18,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "85a0c8a9932b83ab",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/Project Notes.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -146,21 +159,22 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "199c55497fa53cd1",
+  "active": "85a0c8a9932b83ab",
   "lastOpenFiles": [
     "db/sqlc/transfer.sql.go",
     "db/sqlc/models.go",
-    "db/sqlc/account.sql.go",
     "db/sqlc/entry.sql.go",
     "db/sqlc/db.go",
+    "db/sqlc/account.sql.go",
     "db/sqlc",
-    "db/query/account.sql~",
-    "Makefile~",
-    "db/query/transfer.sql~",
-    "db/query/entry.sql~",
-    "db/query/transfer.sql",
-    "`$ whereis [command]`.md",
+    "docs/notes/Unit Test (GO).md",
+    "sqlc.yaml~",
+    "db/sqlc/main_test.go~",
+    "db/sqlc/main_test.go",
+    "db/main_test.go",
+    "db/sqlc/account_test.go~",
     "docs/Project Notes.md",
+    "`$ whereis [command]`.md",
     "docs/notes/CRUD.md",
     "docs/notes/Uncompress .tar.gz files.md",
     "docs/notes/OS.md",

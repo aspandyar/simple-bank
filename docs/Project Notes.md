@@ -5,6 +5,7 @@
 - [Docker](#docker)
 - [Migration](#migration)
 - [CRUD](#crud)
+- [Unit Test](#unit-test)
 
 ## Application
 
@@ -146,10 +147,13 @@ sql:
       schema: "./db/migration/"  
       gen:  
           go:  
-              package: "sqlc"  
+              package: "db"  
               out: "db/sqlc"  
               sql_package: "database/sql"
 ```
+
+- `Package` required name of package which will be set up all generating files
+- `Out` is path where it should generate it
 
 - Also I created a directory `./db/query/account.sql`, and insert a generation code from docs:
 
@@ -182,4 +186,6 @@ WHERE id = $1;
 ```
 
 - After it, execute command: `sqlc generate` to generate CRUD function to account table.
+
+## Unit Test
 
