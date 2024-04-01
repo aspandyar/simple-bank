@@ -189,3 +189,6 @@ WHERE id = $1;
 
 ## Unit Test
 
+### By applying unit test in golang, we should to import postgres driver, in that cases used a [pq](https://github.com/lib/pq) golang lib
+
+To check testing result it would be easier to use [testify](https://github.com/stretchr/testify) lib, instead of writing by own.
