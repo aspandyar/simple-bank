@@ -6,6 +6,8 @@
 - [Migration](#migration)
 - [CRUD](#crud)
 - [Unit Test](#unit-test)
+- [Transaction](#transaction)
+
 
 ## Application
 
@@ -39,6 +41,8 @@
 
 ## Docker
 
+### Manual to [[Docker]]
+
 ###  I used a [docker hub](https://hub.docker.com/) to download image of container to PostgresSQL.
 
 ### *Alpine* images are images, which size are very small, so I use it.
@@ -69,7 +73,7 @@ docker exec -it postgres12 psql -U root
 
 ## Migration
 
-### Migration will be in [golang library](https://github.com/golang-migrate/migrate)
+### [[migration.canvas|migration]] will be in [golang library](https://github.com/golang-migrate/migrate)
 
 
 See how to download it in [[Uncompress .tar.gz files]]
@@ -132,7 +136,7 @@ To apply migration, we should to set up database in psql (PostgreSQL), so create
 
 ## CRUD
 
-	note: see [[CRUD]] to see more about it
+**note**: see [[CRUD]] to learn more about it
 
 ### I use [sqlc](https://github.com/sqlc-dev/sqlc) to generate CRUD code in our project.
 
@@ -192,3 +196,10 @@ WHERE id = $1;
 ### By applying unit test in golang, we should to import postgres driver, in that cases used a [pq](https://github.com/lib/pq) golang lib
 
 To check testing result it would be easier to use [testify](https://github.com/stretchr/testify) lib, instead of writing by own.
+
+[see unit tests in repo](https://github.com/aspandyar/simple-bank/tree/master/db/sqlc) and some [[Unit Test (GO)]] notes
+
+## Transaction
+
+**notes:** [[Transaction]]
+
