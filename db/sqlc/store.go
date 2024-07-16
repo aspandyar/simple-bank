@@ -4,7 +4,7 @@ import "database/sql"
 
 type Store struct {
 	*Queries
-	db *pgx.
+	db *sql.DB
 }
 
 func NewStore(db *sql.DB) *Store {

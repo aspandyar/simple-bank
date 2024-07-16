@@ -9,7 +9,28 @@ To download a sqlc, use following link:
 
 	https://docs.sqlc.dev/en/latest/tutorials/getting-started-postgresql.html
 
-Example of slqc.yml code:
+
+Example of sqlc.yml code with v1, which would not require a pgx driver:
+
+```yml
+version: "1"  
+packages:  
+  - name: "db"  
+    path: "./db/sqlc"  
+    queries: "./db/query/"  
+    schema: "./db/migration/"  
+    engine: "postgresql"  
+    emit_json_tags: true  
+    emit_prepared_queries: false  
+    emit_interface: false  
+    emit_exact_table_names: false
+```
+
+
+
+
+
+Example of sqlc.yml code with new driver pgx:
 
 ```yml
 version: "2"  

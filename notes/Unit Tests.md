@@ -6,12 +6,17 @@ Before starting download a special lib, to work with it:
 $ go get github.com/lib/pq
 ```
 
+it should be import to `main_test.go` file to define a postgres Driver here.
+
+
 ```go
-package sqlc  
+package db  
   
 import (  
-    "context"  
-    "github.com/jackc/pgx/v5"    "log"    "os"    "testing")  
+    "database/sql"  
+    "log"    "os"    "testing"  
+    _ "github.com/lib/pq"  // following import not used, but it should be here!!!
+)  
   
 const (  
     dbDriver = "postgres"  
@@ -21,27 +26,16 @@ const (
 var testQueries *Queries  
   
 func TestMain(m *testing.M) {  
-    ctx := context.Background()  
-  
-    pool, err := pgx.Connect(ctx, dbSource)  
+    conn, err := sql.Open(dbDriver, dbSource)  
     if err != nil {  
-       log.Fatalf("Unable to connect to database: %v\n", err)  
+       log.Fatal("cannot connect to db:", err)  
     }  
   
-    defer func(pool *pgx.Conn, ctx context.Context) {  
-       err := pool.Close(ctx)  
-       if err != nil {  
-          log.Fatalf("Unable to close database connection: %v\n", err)  
-       }  
-    }(pool, ctx)  
-  
-    testQueries = New(pool)  
+    testQueries = New(conn)  
   
     os.Exit(m.Run())  
 }
 ```
-
-Example of code to start a test db connections
 
 
 ### To test a data, just use a ready lib: [testify](https://github.com/stretchr/testify):

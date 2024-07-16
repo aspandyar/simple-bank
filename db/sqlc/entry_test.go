@@ -24,8 +24,6 @@ func createRandomEntry(t *testing.T, account Account) Entry {
 	require.NotZero(t, entry.ID)
 	require.NotZero(t, entry.CreatedAt)
 
-	require.True(t, entry.CreatedAt.Valid)
-
 	return entry
 }
 
@@ -47,8 +45,7 @@ func TestGetEntry(t *testing.T) {
 	require.Equal(t, entry1.AccountID, entry2.AccountID)
 	require.Equal(t, entry1.Amount, entry2.Amount)
 
-	require.True(t, entry2.CreatedAt.Valid)
-	require.WithinDuration(t, entry1.CreatedAt.Time, entry2.CreatedAt.Time, time.Second)
+	require.WithinDuration(t, entry1.CreatedAt, entry2.CreatedAt, time.Second)
 }
 
 func TestListEntry(t *testing.T) {
