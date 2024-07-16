@@ -6,9 +6,13 @@ Simple Bank is a project created as part of a Udemy course to demonstrate buildi
 
 This project is a simple bank application that provides functionalities for:
 
-- Creating and managing accounts
-- Performing transactions
+- Creating and managing accounts [[CRUD]]
+- Performing [[DB Transaction]]
 - Managing balances
+
+
+Also you can read additional notes, make by obsidian: [[Simple Bank]] in notes directory.
+
 
 ## Technologies Used
 
