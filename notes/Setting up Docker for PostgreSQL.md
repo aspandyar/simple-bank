@@ -63,6 +63,19 @@ $ docker rm <container_id_OR_name>
 $ docker image rm <image_id_OR_name>
 ```
 
+
+To run a stopped container:
+
+```bash
+$ docker stop <container_name_OR_id>
+```
+
+To stop a running container:
+
+```bash
+$ docker run <container_name_OR_id>
+```
+
 ### Example
 
 
