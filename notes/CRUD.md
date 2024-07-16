@@ -5,6 +5,10 @@ Way to apply CRUD in golang:
 
 ![[Pasted image 20240716205515.png]]
 
+To download a sqlc, use following link:
+
+	https://docs.sqlc.dev/en/latest/tutorials/getting-started-postgresql.html
+
 Example of slqc.yml code:
 
 ```yml
@@ -62,4 +66,10 @@ DELETE FROM accounts
 WHERE id = $1;
 ```
 
+
+### NOTE: If you would use a current version you should to make sure to download a special version of [golang lib](https://docs.sqlc.dev/en/latest/tutorials/getting-started-postgresql.html) for working with PostgreSQL:
+
+```bash
+$ go get github.com/jackc/pgx/v5
+```
 

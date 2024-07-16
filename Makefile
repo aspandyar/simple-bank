@@ -55,7 +55,7 @@ dropdb:
 
 migrateup:
 	@echo -e "$(COLOR_BLUE)Migrating up...$(COLOR_RESET)"
-	@if migrate -path db/migration -database "postgresql://root:qwerty123@localhost:5432/simple_bank?sslmode=disable" -verbose up; then \
+	@if migrate -path db/migration/ -database "postgresql://root:qwerty123@localhost:5432/simple_bank?sslmode=disable" -verbose up; then \
 	    echo -e "$(COLOR_GREEN)Migrated up successfully.$(COLOR_RESET)"; \
 	else \
 	    echo -e "$(COLOR_RED)Migration up failed.$(COLOR_RESET)" && exit 1; \
@@ -63,15 +63,10 @@ migrateup:
 
 migratedown:
 	@echo -e "$(COLOR_BLUE)Migrating down...$(COLOR_RESET)"
-	@read -p "Are you sure you want to migrate down? This action will apply down migrations. [y/N] " answer && \
-	if [ "$$answer" = "y" ]; then \
-	    if migrate -path db/migration -database "postgresql://root:qwerty123@localhost:5432/simple_bank?sslmode=disable" -verbose down; then \
-	        echo -e "$(COLOR_GREEN)Migrated down successfully.$(COLOR_RESET)"; \
-	    else \
-	        echo -e "$(COLOR_RED)Migration down failed.$(COLOR_RESET)" && exit 1; \
-	    fi \
+	@if migrate -path db/migration/ -database "postgresql://root:qwerty123@localhost:5432/simple_bank?sslmode=disable" -verbose down; then \
+	    echo -e "$(COLOR_GREEN)Migrated down successfully.$(COLOR_RESET)"; \
 	else \
-	    echo -e "$(COLOR_RED)Operation canceled by user.$(COLOR_RESET)" && exit 1; \
+	    echo -e "$(COLOR_RED)Migration down failed.$(COLOR_RESET)" && exit 1; \
 	fi
 
 sqlc:
@@ -82,4 +77,12 @@ sqlc:
 	    echo -e "$(COLOR_RED)Failed to generate SQLC.$(COLOR_RESET)" && exit 1; \
 	fi
 
-.PHONY: postgres createdb dropdb migrateup migratedown sqlc
+test:
+	@echo -e "$(COLOR_BLUE)Running tests...$(COLOR_RESET)"
+	@if go test -v -cover ./...; then \
+	    echo -e "$(COLOR_GREEN)Tests passed successfully.$(COLOR_RESET)"; \
+	else \
+	    echo -e "$(COLOR_RED)Tests failed.$(COLOR_RESET)" && exit 1; \
+	fi
+
+.PHONY: postgres createdb dropdb migrateup migratedown sqlc tests
