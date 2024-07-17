@@ -85,4 +85,8 @@ test:
 	    echo -e "$(COLOR_RED)Tests failed.$(COLOR_RESET)" && exit 1; \
 	fi
 
-.PHONY: postgres createdb dropdb migrateup migratedown sqlc tests
+server:
+	@echo -e "$(COLOR_BLUE)Starting server...$(COLOR_RESET)"
+	@go run main.go
+
+.PHONY: postgres createdb dropdb migrateup migratedown sqlc test server
