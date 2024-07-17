@@ -1,4 +1,4 @@
-# Simple Bank
+ # Simple Bank
 
 Simple Bank is a project created as part of a Udemy course to demonstrate building a backend application using Golang, PostgreSQL, and Kubernetes.
 
