@@ -89,4 +89,9 @@ server:
 	@echo -e "$(COLOR_BLUE)Starting server...$(COLOR_RESET)"
 	@go run main.go
 
-.PHONY: postgres createdb dropdb migrateup migratedown sqlc test server
+mock:
+	@echo -e "$(COLOR_BLUE)Generating mocks...$(COLOR_RESET)"
+	@mockgen -package mockdb -destination db/mock/store.go github.com/aspandyar/simple-bank/db/sqlc Store
+	@echo -e "$(COLOR_GREEN)Mocks generated successfully.$(COLOR_RESET)"
+
+.PHONY: postgres createdb dropdb migrateup migratedown sqlc test server mock
