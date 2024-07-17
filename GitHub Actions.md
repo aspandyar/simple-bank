@@ -46,5 +46,8 @@
 ![[Pasted image 20240717161530.png]]
 
 
+### Example of go.yml file:
 
+```yml
 
+```
