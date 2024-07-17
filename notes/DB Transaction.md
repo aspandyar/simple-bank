@@ -19,5 +19,16 @@ FOR UPDATE;
 
 
 
-#### NOTE: blocking some type of TX would leads to [[Deadlock]], so see following page, how to avoid it!
+#### NOTE: blocking some type of TX would leads to [[Deadlock `FOR UPDATE`]], so see following page, how to avoid it!
+
+
+```sql
+-- name: AddAccountBalance :one  
+UPDATE accounts  
+SET balance = balance + sqlc.arg(amount)  
+WHERE id = sqlc.arg(id)  
+RETURNING *;
+```
+
+in sqlc, we can show what var should we have by `sqlc.arg(name)`
 
