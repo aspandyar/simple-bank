@@ -27,3 +27,7 @@ type Store interface {
  
 
 
+### To fully understand how to make that tests, withing github:
+
+- https://github.com/aspandyar/simple-bank
+

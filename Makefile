@@ -61,9 +61,25 @@ migrateup:
 	    echo -e "$(COLOR_RED)Migration up failed.$(COLOR_RESET)" && exit 1; \
 	fi
 
+migrateup1:
+	@echo -e "$(COLOR_BLUE)Migrating up...$(COLOR_RESET)"
+	@if migrate -path db/migration/ -database "postgresql://root:qwerty123@localhost:5432/simple_bank?sslmode=disable" -verbose up 1; then \
+	    echo -e "$(COLOR_GREEN)Migrated up successfully.$(COLOR_RESET)"; \
+	else \
+	    echo -e "$(COLOR_RED)Migration up failed.$(COLOR_RESET)" && exit 1; \
+	fi
+
 migratedown:
 	@echo -e "$(COLOR_BLUE)Migrating down...$(COLOR_RESET)"
 	@if migrate -path db/migration/ -database "postgresql://root:qwerty123@localhost:5432/simple_bank?sslmode=disable" -verbose down; then \
+	    echo -e "$(COLOR_GREEN)Migrated down successfully.$(COLOR_RESET)"; \
+	else \
+	    echo -e "$(COLOR_RED)Migration down failed.$(COLOR_RESET)" && exit 1; \
+	fi
+
+migratedown1:
+	@echo -e "$(COLOR_BLUE)Migrating down...$(COLOR_RESET)"
+	@if migrate -path db/migration/ -database "postgresql://root:qwerty123@localhost:5432/simple_bank?sslmode=disable" -verbose down 1; then \
 	    echo -e "$(COLOR_GREEN)Migrated down successfully.$(COLOR_RESET)"; \
 	else \
 	    echo -e "$(COLOR_RED)Migration down failed.$(COLOR_RESET)" && exit 1; \
@@ -94,4 +110,4 @@ mock:
 	@mockgen -package mockdb -destination db/mock/store.go github.com/aspandyar/simple-bank/db/sqlc Store
 	@echo -e "$(COLOR_GREEN)Mocks generated successfully.$(COLOR_RESET)"
 
-.PHONY: postgres createdb dropdb migrateup migratedown sqlc test server mock
+.PHONY: postgres createdb dropdb migrateup migratedown migrateup1 migratedown1 sqlc test server mock

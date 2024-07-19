@@ -55,3 +55,10 @@ $ migrate create -ext sql -dir db/migration -seq init_schema
 
 ![[Pasted image 20240716202718.png]]
 
+
+### To make a second step in migration, write in following formant:
+
+```bash
+$ migrate create -ext sql -dir db/migration -seq add_users
+```
+
