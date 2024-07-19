@@ -24,5 +24,6 @@ type Store interface {
     TransferTx(ctx context.Context, arg TransferTxParams) (TransferTxResult, error)  
 }
 ```
+ 
 
 
