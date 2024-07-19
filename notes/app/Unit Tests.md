@@ -68,3 +68,26 @@ func TestCreateAccount(t *testing.T) {
 }
 ```
 
+
+
+#### To handle DB Error:
+
+`you can use following code to handle db error:`
+
+```go
+if err != nil {
+	if pqErr, ok := err.(*pq.Error); ok {
+		log.Println(pqErr.Code.Name())
+	}
+}
+```
+
+OR
+
+```go
+var pqErr *pq.Error  
+if errors.As(err, &pqErr) {  
+    log.Println(pqErr.Code.Name())  
+}
+```
+
