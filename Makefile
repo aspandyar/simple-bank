@@ -8,14 +8,14 @@ COLOR_BLUE=\033[1;34m
 # Targets
 postgres:
 	@echo -e "$(COLOR_BLUE)Starting PostgreSQL container...$(COLOR_RESET)"
-	@if docker run --name simple-bank-postgres -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=qwerty123 -d postgres:latest; then \
+	@if docker run -d --name simple-bank-postgres --network simple-bank-network -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=qwerty123 -d postgres:latest; then \
 	    echo -e "$(COLOR_GREEN)PostgreSQL container started successfully.$(COLOR_RESET)"; \
 	else \
 	    echo -e "$(COLOR_RED)Failed to start PostgreSQL container. Attempting to remove existing container...$(COLOR_RESET)"; \
 	    read -p "Are you sure you want to remove the existing PostgreSQL container and start a new one? [y/N] " answer && \
 	    if [ "$$answer" = "y" ]; then \
 	        docker rm -f simple-bank-postgres && \
-	        docker run --name simple-bank-postgres -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=qwerty123 -d postgres:latest && \
+	        docker run -d --name simple-bank-postgres --network simple-bank-network -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=qwerty123 -d postgres:latest && \
 	        echo -e "$(COLOR_GREEN)PostgreSQL container started successfully after removal.$(COLOR_RESET)" || \
 	        (echo -e "$(COLOR_RED)Failed to start PostgreSQL container even after removal.$(COLOR_RESET)" && exit 1); \
 	    else \
