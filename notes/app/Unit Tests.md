@@ -51,7 +51,7 @@ func TestCreateAccount(t *testing.T) {
     arg := CreateAccountParams{  
        Owner:    "owner",  
        Balance:  100,  
-       Currency: "USD",  
+       Currency: util.USD,  
     }  
   
     account, err := testQueries.CreateAccount(context.Background(), arg)  
