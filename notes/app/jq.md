@@ -8,3 +8,6 @@ $ aws secretsmanager get-secret-value --secret-id simple_bank --query SecretStri
 Advance using jq to convert format data
 
 
+manual of using:
+	https://jqlang.github.io/jq/manual/#invoking-jq
+
