@@ -4,6 +4,8 @@ set -e
 
 echo "run db migration"
 
+ls /app/
+
 cat /app/app.env
 
 . /app/app.env
