@@ -32,14 +32,8 @@ jobs:
         with:
           registry-type: public
 
-      - name: Output raw secret data
-        run:  aws secretsmanager get-secret-value --region eu-north-1 --secret-id simple_bank --query SecretString --output text
-
       - name: Load secretes and save to app.env
-        run:  aws secretsmanager get-secret-value --region eu-north-1 --secret-id simple_bank --query SecretString --output text
-
-      - name: Check data writing
-        run: cat app.env
+        run:  aws secretsmanager get-secret-value --region eu-north-1 --secret-id simple_bank --query SecretString --output text > app.env
 
       - name: Build, tag, and push docker image to Amazon ECR Public
         env:
