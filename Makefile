@@ -5,6 +5,9 @@ COLOR_GREEN=\033[1;32m
 COLOR_RED=\033[1;31m
 COLOR_BLUE=\033[1;34m
 
+DB_URL := postgresql://root:qwerty123@localhost:5432/simple_bank?sslmode=disable
+MIGRATION_PATH := db/migration
+
 # Targets
 postgres:
 	@echo -e "$(COLOR_BLUE)Starting PostgreSQL container...$(COLOR_RESET)"
@@ -17,7 +20,7 @@ postgres:
 	        docker rm -f simple-bank-postgres && \
 	        docker run -d --name simple-bank-postgres --network simple-bank-network -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=qwerty123 -d postgres:latest && \
 	        echo -e "$(COLOR_GREEN)PostgreSQL container started successfully after removal.$(COLOR_RESET)" || \
-	        (echo -e "$(COLOR_RED)Failed to start PostgreSQL container even after removal.$(COLOR_RESET)" && exit 1); \
+	        (echo -e "$(COLOR_RED)Failed to start PostgreSQL container, you have no image named: postgres. Use: docker pull postgres.$(COLOR_RESET)" && exit 1); \
 	    else \
 	        echo -e "$(COLOR_RED)Operation canceled by user.$(COLOR_RESET)" && exit 1; \
 	    fi \
@@ -54,35 +57,45 @@ dropdb:
 	fi
 
 migrateup:
-	@echo -e "$(COLOR_BLUE)Migrating up...$(COLOR_RESET)"
-	@if migrate -path db/migration/ -database "postgresql://root:qwerty123@localhost:5432/simple_bank?sslmode=disable" -verbose up; then \
-	    echo -e "$(COLOR_GREEN)Migrated up successfully.$(COLOR_RESET)"; \
+	@echo -e "$(COLOR_BLUE)Migrating up all pending migrations...$(COLOR_RESET)"
+	@if migrate -path $(MIGRATION_PATH) -database "$(DB_URL)" -verbose up; then \
+	    echo -e "$(COLOR_GREEN)All migrations applied successfully.$(COLOR_RESET)"; \
 	else \
-	    echo -e "$(COLOR_RED)Migration up failed.$(COLOR_RESET)" && exit 1; \
+	    echo -e "$(COLOR_RED)Migration failed.$(COLOR_RESET)" && exit 1; \
 	fi
 
-migrateup1:
-	@echo -e "$(COLOR_BLUE)Migrating up...$(COLOR_RESET)"
-	@if migrate -path db/migration/ -database "postgresql://root:qwerty123@localhost:5432/simple_bank?sslmode=disable" -verbose up 1; then \
-	    echo -e "$(COLOR_GREEN)Migrated up successfully.$(COLOR_RESET)"; \
+migrateup_steps:
+	@if [ -z "$(steps)" ]; then \
+	    echo -e "$(COLOR_RED)Error: 'steps' variable is not set. Usage: make migrateup_steps steps=<number>$(COLOR_RESET)"; \
+	    exit 1; \
 	else \
-	    echo -e "$(COLOR_RED)Migration up failed.$(COLOR_RESET)" && exit 1; \
+	    echo -e "$(COLOR_BLUE)Migrating up $(steps) step(s)...$(COLOR_RESET)"; \
+	    if migrate -path $(MIGRATION_PATH) -database "$(DB_URL)" -verbose up $(steps); then \
+	        echo -e "$(COLOR_GREEN)Migrated up $(steps) step(s) successfully.$(COLOR_RESET)"; \
+	    else \
+	        echo -e "$(COLOR_RED)Migration up failed.$(COLOR_RESET)" && exit 1; \
+	    fi; \
 	fi
 
 migratedown:
-	@echo -e "$(COLOR_BLUE)Migrating down...$(COLOR_RESET)"
-	@if migrate -path db/migration/ -database "postgresql://root:qwerty123@localhost:5432/simple_bank?sslmode=disable" -verbose down; then \
-	    echo -e "$(COLOR_GREEN)Migrated down successfully.$(COLOR_RESET)"; \
+	@echo -e "$(COLOR_BLUE)Rolling back all migrations...$(COLOR_RESET)"
+	@if migrate -path $(MIGRATION_PATH) -database "$(DB_URL)" -verbose down; then \
+	    echo -e "$(COLOR_GREEN)All migrations rolled back successfully.$(COLOR_RESET)"; \
 	else \
-	    echo -e "$(COLOR_RED)Migration down failed.$(COLOR_RESET)" && exit 1; \
+	    echo -e "$(COLOR_RED)Rollback failed.$(COLOR_RESET)" && exit 1; \
 	fi
 
-migratedown1:
-	@echo -e "$(COLOR_BLUE)Migrating down...$(COLOR_RESET)"
-	@if migrate -path db/migration/ -database "postgresql://root:qwerty123@localhost:5432/simple_bank?sslmode=disable" -verbose down 1; then \
-	    echo -e "$(COLOR_GREEN)Migrated down successfully.$(COLOR_RESET)"; \
+migratedown_steps:
+	@if [ -z "$(steps)" ]; then \
+	    echo -e "$(COLOR_RED)Error: 'steps' variable is not set. Usage: make migratedown_steps steps=<number>$(COLOR_RESET)"; \
+	    exit 1; \
 	else \
-	    echo -e "$(COLOR_RED)Migration down failed.$(COLOR_RESET)" && exit 1; \
+	    echo -e "$(COLOR_BLUE)Migrating down $(steps) step(s)...$(COLOR_RESET)"; \
+	    if migrate -path $(MIGRATION_PATH) -database "$(DB_URL)" -verbose down $(steps); then \
+	        echo -e "$(COLOR_GREEN)Migrated down $(steps) step(s) successfully.$(COLOR_RESET)"; \
+	    else \
+	        echo -e "$(COLOR_RED)Migration down failed.$(COLOR_RESET)" && exit 1; \
+	    fi; \
 	fi
 
 sqlc:

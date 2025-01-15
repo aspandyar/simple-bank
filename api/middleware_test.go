@@ -2,13 +2,14 @@ package api
 
 import (
 	"fmt"
-	"github.com/aspandyar/simple-bank/token"
-	"github.com/gin-gonic/gin"
-	"github.com/stretchr/testify/require"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 	"time"
+
+	"github.com/aspandyar/simple-bank/token"
+	"github.com/gin-gonic/gin"
+	"github.com/stretchr/testify/require"
 )
 
 func addAuthorization(
@@ -19,8 +20,9 @@ func addAuthorization(
 	username string,
 	duration time.Duration,
 ) {
-	userToken, err := tokenMaker.CreateToken(username, duration)
+	userToken, payload, err := tokenMaker.CreateToken(username, duration)
 	require.NoError(t, err)
+	require.NotZero(t, payload)
 
 	authorizationHeader := fmt.Sprintf("%s %s", authorizationType, userToken)
 	request.Header.Set(authorizationHeaderKey, authorizationHeader)

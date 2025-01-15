@@ -2,6 +2,7 @@ package api
 
 import (
 	"fmt"
+
 	db "github.com/aspandyar/simple-bank/db/sqlc"
 	"github.com/aspandyar/simple-bank/token"
 	"github.com/aspandyar/simple-bank/util"
@@ -47,6 +48,7 @@ func (server *Server) setupRoutes() {
 
 	router.POST("/users", server.createUser)
 	router.POST("/users/login", server.loginUser)
+	router.POST("/token/renew_access", server.renewAccessToken)
 
 	authRoutes := router.Group("/").Use(authMiddleware(server.tokenMaker))
 
