@@ -106,6 +106,22 @@ sqlc:
 	    echo -e "$(COLOR_RED)Failed to generate SQLC.$(COLOR_RESET)" && exit 1; \
 	fi
 
+db_docs:
+	@echo -e "$(COLOR_BLUE)Building database documentation...$(COLOR_RESET)"
+	@if dbdocs build docs/db.dbml; then \
+	    echo -e "$(COLOR_GREEN)Database documentation built successfully.$(COLOR_RESET)"; \
+	else \
+	    echo -e "$(COLOR_RED)Failed to build database documentation.$(COLOR_RESET)" && exit 1; \
+	fi
+
+db_schema:
+	@echo -e "$(COLOR_BLUE)Generating database schema...$(COLOR_RESET)"
+	@if dbml2sql --postgres -o docs/schema.sql docs/db.dbml; then \
+	    echo -e "$(COLOR_GREEN)Database schema generated successfully.$(COLOR_RESET)"; \
+	else \
+	    echo -e "$(COLOR_RED)Failed to generate database schema.$(COLOR_RESET)" && exit 1; \
+	fi
+
 test:
 	@echo -e "$(COLOR_BLUE)Running tests...$(COLOR_RESET)"
 	@if go test -v -cover ./...; then \
@@ -123,4 +139,4 @@ mock:
 	@mockgen -package mockdb -destination db/mock/store.go github.com/aspandyar/simple-bank/db/sqlc Store
 	@echo -e "$(COLOR_GREEN)Mocks generated successfully.$(COLOR_RESET)"
 
-.PHONY: postgres createdb dropdb migrateup migratedown migrateup1 migratedown1 sqlc test server mock
+.PHONY: postgres createdb dropdb migrateup migratedown migrateup1 migratedown1 sqlc db_docs db_schema test server mock
