@@ -142,12 +142,14 @@ proto:
 	@rm -f pb/*.go
 	@protoc --proto_path=proto --go_out=pb --go_opt=paths=source_relative \
 	--go-grpc_out=pb --go-grpc_opt=paths=source_relative \
-    proto/*.proto
+	--grpc-gateway_out=pb --grpc-gateway_opt=paths=source_relative \
+	proto/*.proto
 	@echo -e "$(COLOR_GREEN)Protobuf generated successfully.$(COLOR_RESET)"
 
 evans:
 	@echo -e "$(COLOR_BLUE)Starting Evans...$(COLOR_RESET)"
 	@evans --host localhost --port 9090 -r repl
 	@echo -e "$(COLOR_GREEN)Evans started successfully.$(COLOR_RESET)"
+
 
 .PHONY: postgres createdb dropdb migrateup migratedown migrateup_steps migratedown_steps sqlc db_docs db_schema test server mock proto evans
