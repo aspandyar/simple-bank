@@ -1,4 +1,3 @@
-# Color definitions
 COLOR_RESET=\033[0m
 COLOR_BOLD=\033[1m
 COLOR_GREEN=\033[1;32m
@@ -8,7 +7,6 @@ COLOR_BLUE=\033[1;34m
 DB_URL := postgresql://root:qwerty123@localhost:5432/simple_bank?sslmode=disable
 MIGRATION_PATH := db/migration
 
-# Targets
 postgres:
 	@echo -e "$(COLOR_BLUE)Starting PostgreSQL container...$(COLOR_RESET)"
 	@if docker run -d --name simple-bank-postgres --network simple-bank-network -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=qwerty123 -d postgres:latest; then \
@@ -139,4 +137,21 @@ mock:
 	@mockgen -package mockdb -destination db/mock/store.go github.com/aspandyar/simple-bank/db/sqlc Store
 	@echo -e "$(COLOR_GREEN)Mocks generated successfully.$(COLOR_RESET)"
 
-.PHONY: postgres createdb dropdb migrateup migratedown migrateup1 migratedown1 sqlc db_docs db_schema test server mock
+proto:
+	@echo -e "$(COLOR_BLUE)Generating protobuf...$(COLOR_RESET)"
+	@rm -f pb/*.go
+	@rm -f docs/swagger/*
+	@protoc --proto_path=proto --go_out=pb --go_opt=paths=source_relative \
+	--go-grpc_out=pb --go-grpc_opt=paths=source_relative \
+	--grpc-gateway_out=pb --grpc-gateway_opt=paths=source_relative \
+	--openapiv2_out=docs/swagger --openapiv2_opt=allow_merge=true,merge_file_name=simple_bank \
+	proto/*.proto
+	@echo -e "$(COLOR_GREEN)Protobuf generated successfully.$(COLOR_RESET)"
+
+evans:
+	@echo -e "$(COLOR_BLUE)Starting Evans...$(COLOR_RESET)"
+	@evans --host localhost --port 9090 -r repl
+	@echo -e "$(COLOR_GREEN)Evans started successfully.$(COLOR_RESET)"
+
+
+.PHONY: postgres createdb dropdb migrateup migratedown migrateup_steps migratedown_steps sqlc db_docs db_schema test server mock proto evans
