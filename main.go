@@ -9,15 +9,21 @@ import (
 
 	"github.com/aspandyar/simple-bank/api"
 	db "github.com/aspandyar/simple-bank/db/sqlc"
+	_ "github.com/aspandyar/simple-bank/docs/statik"
 	"github.com/aspandyar/simple-bank/gapi"
 	"github.com/aspandyar/simple-bank/pb"
 	"github.com/aspandyar/simple-bank/util"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
+	"github.com/rakyll/statik/fs"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 	"google.golang.org/protobuf/encoding/protojson"
 
+	_ "github.com/golang-migrate/migrate/v4/database/postgres"
+	_ "github.com/golang-migrate/migrate/v4/source/file"
 	_ "github.com/lib/pq"
+
+	"github.com/golang-migrate/migrate/v4"
 )
 
 func main() {
@@ -31,11 +37,26 @@ func main() {
 		log.Fatal("cannot connect to db:", err)
 	}
 
+	runDBMigration(config.MigrationURL, config.DBSource)
+
 	store := db.NewStore(conn)
 
 	go runGatewayServer(config, store)
 	runGrpcServer(config, store)
 
+}
+
+func runDBMigration(migrateURL string, dbSrouce string) {
+	migration, err := migrate.New(migrateURL, dbSrouce)
+	if err != nil {
+		log.Fatal("cannot create migration instance:", err)
+	}
+
+	if err = migration.Up(); err != nil && err != migrate.ErrNoChange {
+		log.Fatal("failed to run migrate up: ", err)
+	}
+
+	log.Println("db migrated successfully")
 }
 
 func runGrpcServer(config util.Config, store db.Store) {
@@ -88,8 +109,13 @@ func runGatewayServer(config util.Config, store db.Store) {
 	mux := http.NewServeMux()
 	mux.Handle("/", grpcMux)
 
-	fs := http.FileServer(http.Dir("./docs/swagger"))
-	mux.Handle("/swagger/", http.StripPrefix("/swagger/", fs))
+	statikFS, err := fs.New()
+	if err != nil {
+		log.Fatal("cannot create statik file server:", err)
+	}
+
+	swaggerHandler := http.StripPrefix("/swagger/", http.FileServer(statikFS))
+	mux.Handle("/swagger/", swaggerHandler)
 
 	listener, err := net.Listen("tcp", config.HTTPServerAddress)
 	if err != nil {
