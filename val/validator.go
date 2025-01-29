@@ -9,7 +9,7 @@ import (
 var (
 	// regex: ^[a-z09_]+$ - only lowercase letters, digits, and underscore
 	isValidUsername = regexp.MustCompile(`^[a-z09_]+$`).MatchString
-	isValidFullName = regexp.MustCompile(`^[a-zA-Z\\s]+$`).MatchString
+	isValidFullName = regexp.MustCompile(`^[a-zA-Z\s]+$`).MatchString
 )
 
 func ValidateString(value string, minLength int, maxLength int) error {
