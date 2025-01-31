@@ -154,5 +154,9 @@ evans:
 	@evans --host localhost --port 9090 -r repl
 	@echo -e "$(COLOR_GREEN)Evans started successfully.$(COLOR_RESET)"
 
+redis:
+	@echo -e "$(COLOR_BLUE)Starting Redis container...$(COLOR_RESET)"
+	@docker run --name redis -p 6379:6379 -d redis:7-alpine
+	@echo -e "$(COLOR_GREEN)Redis container started successfully.$(COLOR_RESET)"
 
-.PHONY: postgres createdb dropdb migrateup migratedown migrateup_steps migratedown_steps sqlc db_docs db_schema test server mock proto evans
+.PHONY: postgres createdb dropdb migrateup migratedown migrateup_steps migratedown_steps sqlc db_docs db_schema test server mock proto evans redis
