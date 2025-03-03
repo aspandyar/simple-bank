@@ -96,6 +96,16 @@ migratedown_steps:
 	    fi; \
 	fi
 
+new_migration:
+	@if [ -z "$(name)" ]; then \
+	    echo -e "$(COLOR_RED)Error: 'name' variable is not set. Usage: make new_migration name=<migration_name>$(COLOR_RESET)"; \
+	    exit 1; \
+	else \
+		echo -e "$(COLOR_BLUE)Creating new migration...$(COLOR_RESET)"; \
+	    migrate create -ext sql -dir $(MIGRATION_PATH) -seq $(name); \
+	    echo -e "$(COLOR_GREEN)New migration created successfully.$(COLOR_RESET)"; \
+	fi
+
 sqlc:
 	@echo -e "$(COLOR_BLUE)Generating SQLC...$(COLOR_RESET)"
 	@if sqlc generate; then \
@@ -171,4 +181,4 @@ redis:
 	    fi \
 	fi
 
-.PHONY: postgres createdb dropdb migrateup migratedown migrateup_steps migratedown_steps sqlc db_docs db_schema test server mock proto evans redis
+.PHONY: postgres createdb dropdb migrateup migratedown migrateup_steps migratedown_steps new_migration sqlc db_docs db_schema test server mock proto evans redis
