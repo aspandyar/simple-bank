@@ -122,7 +122,7 @@ db_schema:
 
 test:
 	@echo -e "$(COLOR_BLUE)Running tests...$(COLOR_RESET)"
-	@if go test -v -cover ./...; then \
+	@if go test -v -cover -short ./...; then \
 	    echo -e "$(COLOR_GREEN)Tests passed successfully.$(COLOR_RESET)"; \
 	else \
 	    echo -e "$(COLOR_RED)Tests failed.$(COLOR_RESET)" && exit 1; \
@@ -156,7 +156,19 @@ evans:
 
 redis:
 	@echo -e "$(COLOR_BLUE)Starting Redis container...$(COLOR_RESET)"
-	@docker run --name redis -p 6379:6379 -d redis:7-alpine
-	@echo -e "$(COLOR_GREEN)Redis container started successfully.$(COLOR_RESET)"
+	@if docker run -d --name redis --network simple-bank-network -p 6379:6379 redis:7-alpine; then \
+	    echo -e "$(COLOR_GREEN)Redis container started successfully.$(COLOR_RESET)"; \
+	else \
+	    echo -e "$(COLOR_RED)Failed to start Redis container. Attempting to remove existing container...$(COLOR_RESET)"; \
+	    read -p "Are you sure you want to remove the existing Redis container and start a new one? [y/N] " answer && \
+	    if [ "$$answer" = "y" ]; then \
+	        docker rm -f redis && \
+	        docker run -d --name redis --network simple-bank-network -p 6379:6379 redis:7-alpine && \
+	        echo -e "$(COLOR_GREEN)Redis container started successfully after removal.$(COLOR_RESET)" || \
+	        (echo -e "$(COLOR_RED)Failed to start Redis container, you have no image named: redis:7-alpine. Use: docker pull redis:7-alpine.$(COLOR_RESET)" && exit 1); \
+	    else \
+	        echo -e "$(COLOR_RED)Operation canceled by user.$(COLOR_RESET)" && exit 1; \
+	    fi \
+	fi
 
 .PHONY: postgres createdb dropdb migrateup migratedown migrateup_steps migratedown_steps sqlc db_docs db_schema test server mock proto evans redis
