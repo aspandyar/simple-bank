@@ -124,7 +124,7 @@
       }
     },
     "/v1/verify_email": {
-      "post": {
+      "get": {
         "summary": "Verify email",
         "description": "Use this API to verify users email address",
         "operationId": "SimpleBank_VerifyEmail",
