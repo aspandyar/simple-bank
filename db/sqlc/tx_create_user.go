@@ -2,7 +2,7 @@ package db
 
 import "context"
 
-type CreateUserTXParams struct {
+type CreateUserTxParams struct {
 	CreateUserParams
 	AfterCreate func(user User) error
 }
@@ -11,7 +11,7 @@ type CreateUserTXResult struct {
 	User User
 }
 
-func (store *SQLStore) CreateUserTX(ctx context.Context, arg CreateUserTXParams) (CreateUserTXResult, error) {
+func (store *SQLStore) CreateUserTX(ctx context.Context, arg CreateUserTxParams) (CreateUserTXResult, error) {
 	var result CreateUserTXResult
 
 	err := store.execTx(ctx, func(queries *Queries) error {

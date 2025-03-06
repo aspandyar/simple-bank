@@ -2,7 +2,6 @@ package gapi
 
 import (
 	"context"
-	"errors"
 	"time"
 
 	db "github.com/aspandyar/simple-bank/db/sqlc"
@@ -19,16 +18,16 @@ import (
 
 func (server *Server) CreateUser(ctx context.Context, req *pb.CreateUserRequest) (*pb.CreateUserResponse, error) {
 	violations := validateCreateUserRequest(req)
-	if len(violations) > 0 {
+	if violations != nil {
 		return nil, invalidArgumentError(violations)
 	}
 
 	hashedPassword, err := util.HashPassword(req.GetPassword())
 	if err != nil {
-		return nil, status.Errorf(codes.Internal, "cannot hash password: %s", err)
+		return nil, status.Errorf(codes.Internal, "failed to hash password: %s", err)
 	}
 
-	arg := db.CreateUserTXParams{
+	arg := db.CreateUserTxParams{
 		CreateUserParams: db.CreateUserParams{
 			Username:       req.GetUsername(),
 			HashedPassword: hashedPassword,
@@ -39,7 +38,6 @@ func (server *Server) CreateUser(ctx context.Context, req *pb.CreateUserRequest)
 			taskPayload := &worker.PayloadSendVerifyEmail{
 				Username: user.Username,
 			}
-
 			opts := []asynq.Option{
 				asynq.MaxRetry(10),
 				asynq.ProcessIn(10 * time.Second),
@@ -52,21 +50,18 @@ func (server *Server) CreateUser(ctx context.Context, req *pb.CreateUserRequest)
 
 	txResult, err := server.store.CreateUserTX(ctx, arg)
 	if err != nil {
-		var pqErr *pq.Error
-		if errors.As(err, &pqErr) {
+		if pqErr, ok := err.(*pq.Error); ok {
 			switch pqErr.Code.Name() {
 			case "unique_violation":
-				return nil, status.Error(codes.AlreadyExists, "username or email already exists")
+				return nil, status.Errorf(codes.AlreadyExists, "username already exists: %s", err)
 			}
 		}
-
-		return nil, status.Errorf(codes.Internal, "cannot create user: %s", err)
+		return nil, status.Errorf(codes.Internal, "failed to create user: %s", err)
 	}
 
 	rsp := &pb.CreateUserResponse{
-		User: converUser(txResult.User),
+		User: convertUser(txResult.User),
 	}
-
 	return rsp, nil
 }
 

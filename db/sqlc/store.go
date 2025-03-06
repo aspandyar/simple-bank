@@ -9,7 +9,7 @@ import (
 type Store interface {
 	Querier
 	TransferTx(ctx context.Context, arg TransferTxParams) (TransferTxResult, error)
-	CreateUserTX(ctx context.Context, arg CreateUserTXParams) (CreateUserTXResult, error)
+	CreateUserTX(ctx context.Context, arg CreateUserTxParams) (CreateUserTXResult, error)
 	VerifyEmailTX(ctx context.Context, arg VerifyEmailTXParams) (VerifyEmailTXResult, error)
 }
 

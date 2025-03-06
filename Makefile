@@ -145,7 +145,9 @@ server:
 mock:
 	@echo -e "$(COLOR_BLUE)Generating mocks...$(COLOR_RESET)"
 	@mockgen -package mockdb -destination db/mock/store.go github.com/aspandyar/simple-bank/db/sqlc Store
+	@mockgen -package mockwk -destination worker/mock/distributor.go github.com/aspandyar/simple-bank/worker TaskDistributor
 	@echo -e "$(COLOR_GREEN)Mocks generated successfully.$(COLOR_RESET)"
+
 
 proto:
 	@echo -e "$(COLOR_BLUE)Generating protobuf...$(COLOR_RESET)"

@@ -74,10 +74,7 @@ func TestCreateUserAPI(t *testing.T) {
 				}
 
 				store.EXPECT().
-					CreateUser(gomock.Any(), eqCreateUserMatcher{
-						arg:      arg,
-						password: password,
-					}).
+					CreateUser(gomock.Any(), eqCreateUserParams(arg, password)).
 					Times(1).
 					Return(user, nil)
 			},
