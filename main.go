@@ -2,34 +2,33 @@ package main
 
 import (
 	"context"
-	"database/sql"
 	"net"
 	"net/http"
 	"os"
 
+	"github.com/golang-migrate/migrate/v4"
 	"github.com/hibiken/asynq"
+	"github.com/jackc/pgx/v5/pgxpool"
+	"github.com/rakyll/statik/fs"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
+	"google.golang.org/protobuf/encoding/protojson"
 
 	"github.com/aspandyar/simple-bank/api"
-	db "github.com/aspandyar/simple-bank/db/sqlc"
-	_ "github.com/aspandyar/simple-bank/docs/statik"
 	"github.com/aspandyar/simple-bank/gapi"
 	"github.com/aspandyar/simple-bank/mail"
 	"github.com/aspandyar/simple-bank/pb"
 	"github.com/aspandyar/simple-bank/util"
 	"github.com/aspandyar/simple-bank/worker"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
-	"github.com/rakyll/statik/fs"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/reflection"
-	"google.golang.org/protobuf/encoding/protojson"
 
+	db "github.com/aspandyar/simple-bank/db/sqlc"
+
+	_ "github.com/aspandyar/simple-bank/docs/statik"
 	_ "github.com/golang-migrate/migrate/v4/database/postgres"
 	_ "github.com/golang-migrate/migrate/v4/source/file"
-	_ "github.com/lib/pq"
-
-	"github.com/golang-migrate/migrate/v4"
 )
 
 func main() {
@@ -42,14 +41,14 @@ func main() {
 		log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr})
 	}
 
-	conn, err := sql.Open(config.DBDriver, config.DBSource)
+	connPool, err := pgxpool.New(context.Background(), config.DBSource)
 	if err != nil {
 		log.Fatal().Err(err).Msg("cannot connect to db:")
 	}
 
 	runDBMigration(config.MigrationURL, config.DBSource)
 
-	store := db.NewStore(conn)
+	store := db.NewStore(connPool)
 
 	redisOpt := asynq.RedisClientOpt{
 		Addr: config.RedisAddress,
