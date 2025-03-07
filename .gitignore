@@ -2,3 +2,5 @@
 .obsidian/
 dbml-error.log
 .vscode/
+.env
+app.env
