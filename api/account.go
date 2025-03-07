@@ -1,13 +1,12 @@
 package api
 
 import (
-	"database/sql"
 	"errors"
+	"net/http"
+
 	db "github.com/aspandyar/simple-bank/db/sqlc"
 	"github.com/aspandyar/simple-bank/token"
 	"github.com/gin-gonic/gin"
-	"github.com/lib/pq"
-	"net/http"
 )
 
 type createAccountRequest struct {
@@ -32,13 +31,10 @@ func (server *Server) createAccount(ctx *gin.Context) {
 
 	account, err := server.store.CreateAccount(ctx, arg)
 	if err != nil {
-		var pqErr *pq.Error
-		if errors.As(err, &pqErr) {
-			switch pqErr.Code.Name() {
-			case "unique_violation", "foreign_key_violation":
-				ctx.JSON(http.StatusForbidden, errorResponse(err))
-				return
-			}
+		errCode := db.ErrorCode(err)
+		if errCode == db.UniqueViolation || errCode == db.ForeignKeyViolation {
+			ctx.JSON(http.StatusForbidden, errorResponse(err))
+			return
 		}
 
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
@@ -61,7 +57,7 @@ func (server *Server) getAccount(ctx *gin.Context) {
 
 	account, err := server.store.GetAccount(ctx, req.ID)
 	if err != nil {
-		if errors.Is(err, sql.ErrNoRows) {
+		if errors.Is(err, db.ErrRecordNotFound) {
 			ctx.JSON(http.StatusNotFound, errorResponse(err))
 			return
 		}

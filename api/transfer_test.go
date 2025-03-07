@@ -4,7 +4,11 @@ import (
 	"bytes"
 	"database/sql"
 	"encoding/json"
-	"fmt"
+	"net/http"
+	"net/http/httptest"
+	"testing"
+	"time"
+
 	mockdb "github.com/aspandyar/simple-bank/db/mock"
 	db "github.com/aspandyar/simple-bank/db/sqlc"
 	"github.com/aspandyar/simple-bank/token"
@@ -12,10 +16,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/require"
 	"go.uber.org/mock/gomock"
-	"net/http"
-	"net/http/httptest"
-	"testing"
-	"time"
 )
 
 func TestTransferAPI(t *testing.T) {
@@ -137,7 +137,7 @@ func TestTransferAPI(t *testing.T) {
 				store.EXPECT().
 					GetAccount(gomock.Any(), gomock.Eq(account1.ID)).
 					Times(1).
-					Return(db.Account{}, sql.ErrNoRows)
+					Return(db.Account{}, db.ErrRecordNotFound)
 
 				store.EXPECT().
 					GetAccount(gomock.Any(), gomock.Eq(account2.ID)).
@@ -171,7 +171,7 @@ func TestTransferAPI(t *testing.T) {
 				store.EXPECT().
 					GetAccount(gomock.Any(), gomock.Eq(account2.ID)).
 					Times(1).
-					Return(db.Account{}, sql.ErrNoRows)
+					Return(db.Account{}, db.ErrRecordNotFound)
 
 				store.EXPECT().
 					TransferTx(gomock.Any(), gomock.Any()).
@@ -338,7 +338,7 @@ func TestTransferAPI(t *testing.T) {
 			data, err := json.Marshal(tc.body)
 			require.NoError(t, err)
 
-			url := fmt.Sprint("/transfers")
+			url := "/transfers"
 			request, err := http.NewRequest(http.MethodPost, url, bytes.NewReader(data))
 			require.NoError(t, err)
 
